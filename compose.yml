@@ -1,0 +1,22 @@
+---
+version: "3.9"
+services:
+ mysqldb:
+   image: krishn23/bloodbank:db
+   ports:
+     - "3306:3306"
+   networks:
+     - mynetwork
+
+ application:
+   image: krishn23/bloodbank:app
+   ports:
+     - "1111:80"
+   depends_on:
+     - "mysqldb"
+   networks:
+     - mynetwork
+
+networks:
+  mynetwork:
+    driver: overlay
